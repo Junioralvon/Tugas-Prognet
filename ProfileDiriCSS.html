@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <title>Profil Diri</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="alvon.jpg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+        display: grid;
+        grid-template-areas:
+          "header header"
+          "sidebar main"
+          "footer footer";
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: auto 1fr auto;
+        min-height: 100vh;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      header {
+        grid-area: header;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+
+      header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .sidebar {
+        grid-area: sidebar;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .sidebar h3 {
+        color: #667eea;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin-bottom: 10px;
+      }
+
+      .sidebar ul li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+        display: block;
+      }
+
+      .sidebar ul li a:hover {
+        background: #f0f0f0;
+      }
+
+      .sidebar .biodata-singkat {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+
+      .sidebar .biodata-singkat img {
+        display: block;
+        margin: 0 auto 10px;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+
+      main {
+        grid-area: main;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      section {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        padding: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      }
+
+      section h2 {
+        color: #667eea;
+        font-size: 2em;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+        position: relative;
+      }
+
+      section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #764ba2;
+        transition: width 0.5s ease;
+      }
+
+      section:hover h2::after {
+        width: 100%;
+      }
+
+      #biodata {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      #biodata img {
+        border-radius: 50%;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
+      }
+
+      #biodata img:hover {
+        transform: scale(1.05) rotate(5deg);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      }
+
+      #biodata p {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        animation: slideInLeft 0.5s ease-out;
+      }
+
+      @keyframes slideInLeft {
+        from { transform: translateX(-50px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+
+      #biodata ul {
+        list-style-type: none;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #biodata ul li {
+        animation: slideInRight 0.5s ease-out 0.2s both;
+      }
+
+      @keyframes slideInRight {
+        from { transform: translateX(50px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+
+      #biodata ul li a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease, transform 0.3s ease;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #biodata ul li a:hover {
+        color: #764ba2;
+        transform: translateX(10px);
+      }
+
+      #biodata ul li a::before {
+        content: '→ ';
+        position: absolute;
+        left: -20px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      #biodata ul li a:hover::before {
+        opacity: 1;
+      }
+
+      #biodata ul li a i {
+        font-size: 1.5em;
+      }
+
+      #pendidikan ul, #hobi ol {
+        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #pendidikan li, #hobi li {
+        font-size: 1.1em;
+        padding: 5px 0;
+        transition: background 0.3s ease;
+      }
+
+      #pendidikan li:hover, #hobi li:hover {
+        background: #f0f0f0;
+        border-radius: 5px;
+        padding-left: 10px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        animation: fadeInUp 0.5s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from { transform: translateY(30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        transition: background 0.3s ease;
+      }
+
+      th {
+        background-color: #667eea;
+        color: white;
+        font-weight: 700;
+      }
+
+      tr:hover {
+        background-color: #f5f5f5;
+      }
+
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        animation: zoomIn 0.5s ease-out;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @keyframes zoomIn {
+        from { transform: scale(0.9); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #555;
+      }
+
+      input, textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input:focus, textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s ease;
+      }
+
+      button:hover::before {
+        left: 100%;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      }
+
+      footer {
+        grid-area: footer;
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+      }
+
+      footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+      }
+
+      @media (max-width: 768px) {
+        body {
+          grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto 1fr auto;
+        }
+
+        .sidebar {
+          padding: 15px;
+        }
+
+        section {
+          padding: 20px;
+        }
+
+        header h1 {
+          font-size: 2em;
+        }
+
+        #biodata img {
+          width: 120px;
+          height: 120px;
+        }
+
+        table {
+          font-size: 0.9em;
+        }
+
+        th, td {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Profile Mahasiswa</h1>
+    </header>
+
+    <aside class="sidebar">
+      <h3>Navigasi</h3>
+      <ul>
+        <li><a href="#biodata">Biodata</a></li>
+        <li><a href="#pendidikan">Riwayat Pendidikan</a></li>
+        <li><a href="#hobi">Hobi</a></li>
+        <li><a href="#organisasi">Pengalaman Organisasi</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+      <div class="biodata-singkat">
+        <img src="alvon.jpg" alt="Foto Profil">
+        <p><strong>Junior Alvon Praditia Dinata</strong></p>
+        <p>Denpasar, Bali</p>
+      </div>
+    </aside>
+
+    <main>
+      <section id="biodata">
+        <h2>Biodata</h2>
+        <img src="alvon.jpg" alt="Foto Profil" width="155" height="180">
+        <p><b>Nama:</b> Junior Alvon Praditia Dinata</p>
+        <p><b>Alamat:</b> Denpasar, Bali</p>
+        <p><b>Email:</b> alvon.junior09@gmail.com</p>
+        <h3>Media Sosial</h3>
+        <ul>
+          <li><a href="https://web.facebook.com/junior.dinata.1/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+          <li><a href="https://www.instagram.com/jralvonpraditia/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+        </ul>
+      </section>
+
+      <section id="pendidikan">
+        <h2>Riwayat Pendidikan</h2>
+        <ul>
+          <li>SD Negri 8 Sumerta</li>
+          <li>SMP PGRI 2 Denpasar</li>
+          <li>SMA Negri 7 Denpasar</li>
+        </ul>
+      </section>
+
+      <section id="hobi">
+        <h2>Hobi</h2>
+        <ol>
+          <li>Traveling</li>
+          <li>Olahraga</li>
+          <li>Main Game</li>
+        </ol>
+      </section>
+
+      <section id="organisasi">
+        <h2>Pengalaman Organisasi</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Tahun</th>
+              <th>Organisasi</th>
+              <th>Jabatan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2021-2022</td>
+              <td>Pentium 7</td>
+              <td>Anggota</td>
+            </tr>
+            <tr>
+              <td>2024-Sekarang</td>
+              <td>Himpunan Mahasiswa Teknologi Informasi</td>
+              <td>Anggota Produksi</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="kontak">
+        <h2>Formulir Kontak</h2>
+        <form action="mailto:alvon.junior09@gmail.com" method="post" enctype="text/plain">
+          <label for="nama">Nama:</label>
+          <input type="text" id="nama" name="nama" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="pesan">Pesan:</label>
+          <textarea id="pesan" name="pesan" rows="5" required></textarea>
+
+          <button type="submit">Kirim Pesan</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Profile Alvon</p>
+    </footer>
+  </body>
+</html>
